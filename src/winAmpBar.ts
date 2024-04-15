@@ -15,9 +15,8 @@ const WIDTH = canvas!.width
 const HEIGHT = canvas!.height;
 canvasCtx?.clearRect(0, 0, WIDTH, HEIGHT);
 
-function draw3(xpos = 0) {
-    const newXpos = xpos > WIDTH ? 0 : xpos + 1
-    requestAnimationFrame(() => draw3(newXpos));
+function draw3() {
+    requestAnimationFrame(() => draw3());
 
     analyser.getByteFrequencyData(dataArray);
 
@@ -38,11 +37,5 @@ function draw3(xpos = 0) {
 
         x += barWidth + 1;
     }
-    drawStroller(canvasCtx!, xpos, highest)
-}
-
-function drawStroller(canvasCtx: CanvasRenderingContext2D, xpos: number, ypos: number) {
-    canvasCtx!.fillStyle = `rgb(100 100 100)`;
-    canvasCtx?.fillRect(xpos, HEIGHT - (ypos), 10, 20)
 }
 export default draw3;
