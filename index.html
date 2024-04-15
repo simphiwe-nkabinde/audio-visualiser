@@ -7,28 +7,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
   <title>Vite + TS</title>
+  <style>
+    #audio-bubbles {
+      z-index: 10;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+
+    #bubbles-canvas {
+      z-index: 1;
+    }
+
+    #song-selection {
+      position: absolute;
+      left: 10px;
+      top: 80px;
+      width: 200px;
+      background: transparent;
+      color: transparent;
+      box-shadow: none !important;
+    }
+
+    #song-selection:hover {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      color: #212529;
+    }
+
+    #song-selection li {
+      cursor: pointer;
+      transition: ease-in-out .2s;
+      font-size: 12px;
+    }
+
+    #song-selection li:hover {
+      background: #212529;
+      color: #ffffff;
+    }
+
+    #overlay {
+      z-index: 20;
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 </head>
 
 <body>
   <div id="app">
-    <main class="container my-2">
-      <button id="btn" class="btn btn-dark mb-3">Start</button>
-      <section>
-        <audio class="d-block mb-2" id="audio-1" controls src="/yesterday.mp3"></audio>
-        <canvas class="rounded" id="canvas-1" width="1000" height="400"></canvas>
-      </section>
-      <section>
-        <audio class="d-block mb-2" id="audio-2" controls src="/yesterday.mp3"></audio>
-        <canvas class="rounded" id="canvas-2" width="1000" height="400"></canvas>
-      </section>
-      <section>
-        <audio class="d-block mb-2" id="audio-3" controls src="/yesterday.mp3"></audio>
-        <canvas class="rounded" id="canvas-3" width="1000" height="400"></canvas>
-      </section>
-
-    </main>
+    <div id="overlay" class="bg-body-tertiary">
+      <button id="start-btn" class="btn btn-dark">Start Audio Visualizer</button>
+    </div>
+    <canvas id="bubbles-canvas"></canvas>
+    <audio id="audio-bubbles" controls src="/yesterday.mp3"></audio>
+    <ul class="list-unstyled rounded-4 overflow-hidden shadow" id="song-selection">
+      <li class="p-3" onclick="setSong('yesterday', 'one')">Yesterday</li>
+      <li class="p-3" onclick="setSong('i-believe', 'two')">I believe</li>
+      <li class="p-3" onclick="setSong('iphinifa', 'three')">Iphinifa</li>
+      <li class="p-3" onclick="setSong('ungowami', 'four')">Ungowami</li>
+      <li class="p-3" onclick="setSong('wasted-on-you', 'one')">Wasted on you</li>
+      <li class="p-3" onclick="setSong('strateng', 'two')">Strateng</li>
+      <li class="p-3" onclick="setSong('speed-it-up', 'three')">Speed it up</li>
+      <li class="p-3" onclick="setSong('star-boy', 'four')">Star Boy</li>
+      <li class="p-3" onclick="setSong('picasso', 'one')">Picasso</li>
+      <li class="p-3" onclick="setSong('new-level', 'one')">New Level</li>
+      <li class="p-3" onclick="setSong('blase', 'one')">Blasé</li>
+    </ul>
   </div>
   <script type="module" src="/src/main.ts"></script>
+  <script>
+    function setSong(song, pallet) {
+      PALLET = pallet
+      const audioEle = document.getElementById('audio-bubbles');
+      audioEle.src = '/audio/' + song + '.mp3';
+      audioEle.play()
+    }
+
+  </script>
 </body>
 
 </html>
