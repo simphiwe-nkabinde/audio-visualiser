@@ -93,7 +93,7 @@ function visualizer() {
       const frequencyUnit = frequencyDataArray[i];
       const domainUnit = domainDataArray[i];
       const unitAve = (frequencyUnit + domainUnit) / 2
-      if (i % 1 == 0) {
+      if (i % 2 == 0) {
         if (i <= onePart) {
           const newRadius = (bubbles[i].getRadius() + (unitAve / 2)) / 2
           bubbles[i].update({ radius: newRadius, velocity: { x: unitAve ** (2 / unitAve), y: unitAve ** (2 / unitAve) } },);
@@ -102,9 +102,8 @@ function visualizer() {
           bubbles[i].update({ radius: newRadius, velocity: { x: unitAve ** (1 / unitAve), y: unitAve ** (1 / unitAve) } },);
         } else if (i >= onePart * 7 && i <= onePart * 8) {
           const newRadius = (bubbles[i].getRadius() + (unitAve / 4)) / 2
-          bubbles[i].update({ radius: newRadius, velocity: { x: 4, y: 4 } },);
+          bubbles[i].update({ radius: newRadius, velocity: { x: 2, y: 2 } },);
         } else {
-          if (i % 3 == 0)
             idleBubble(bubbles[i])
         }
       }
