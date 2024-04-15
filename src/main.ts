@@ -42,11 +42,13 @@ function visualizer() {
     //color palette 4 https://coolors.co/cdb4db-ffc8dd-ffafcc-bde0fe-a2d2ff
     four: ['rgb(205, 180, 219)', 'rgb(255, 200, 221)', 'rgb(255, 175, 204)', 'rgb(189, 224, 254)', 'rgb(162, 210, 255)'],
     //color palette 5 https://coolors.co/palette/042a2b-5eb1bf-cdedf6-ef7b45-d84727
-    five: ['rgb(4, 42, 43)', 'rgb(94, 177, 191)', 'rgb(205, 237, 246)', 'rgb(239, 123, 69)', 'rgb(216, 71, 39)']
+    five: ['rgb(4, 42, 43)', 'rgb(94, 177, 191)', 'rgb(205, 237, 246)', 'rgb(239, 123, 69)', 'rgb(216, 71, 39)'],
+    //https://coolors.co/palette/E1E1E1-090909-1B1B1B-737373-020101
+    black: ['225, 225, 225)', 'rgb(9, 9, 9)', 'rgb(27, 27, 27)', 'rgb(115, 115, 115)', 'rgb(2, 1, 1)']
   }
 
   for (let i = 0; i < bufferLength; i++) {
-    const randomColor = colorSet.one[Math.floor(Math.random() * 5)];
+    const randomColor = colorSet.black[Math.floor(Math.random() * 5)];
     const randomStartPosition = correctStartPosition(Math.floor(Math.random() * WIDTH), Math.floor(Math.random() * HEIGHT))
     const randomRadius = Math.floor(Math.random() * maxBubbleRadius);
     let polarityX = i % 2 == 0 ? -1 : 1
