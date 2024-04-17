@@ -25,28 +25,16 @@ export default class Bubble {
         this.canvasCtx.beginPath();
         this.canvasCtx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false);
         this.canvasCtx.shadowBlur = 30;
-        this.canvasCtx.shadowOffsetX = this.position.x - (this.containerWidth/2);
-        this.canvasCtx.shadowOffsetY =  this.position.y - (this.containerHeight/2);
+        this.canvasCtx.shadowOffsetX = this.position.x - (this.containerWidth / 2);
+        this.canvasCtx.shadowOffsetY = this.position.y - (this.containerHeight / 2);
         this.canvasCtx.shadowColor = "rgba(0, 0, 0, 0.1)";
         this.canvasCtx.fillStyle = this.bgColor;
         this.canvasCtx.fill();
     }
-    drawShadow() {
-        // if (this.radius < 10) return
-        // this.canvasCtx.beginPath();
-        // this.canvasCtx.arc(this.position.x + 3, this.position.y-5, 2, 0, Math.PI * 2, false);
-        // this.canvasCtx.fillStyle = 'rgba(0, 0, 0)';
-        // this.canvasCtx.fill();
-    }
 
     update(bubbleOptions: BubbleOptions) {
-        if (this.position.x + this.radius > this.containerWidth || this.position.x - this.radius < 0) {
-            this.velocity.x = -this.velocity.x
-        }
+        this.bounceOnCollision();
 
-        if (this.position.y + this.radius > this.containerHeight || this.position.y - this.radius < 0) {
-            this.velocity.y = -this.velocity.y
-        }
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
@@ -60,12 +48,19 @@ export default class Bubble {
             }
         }
 
-        
         this.draw();
-        this.drawShadow();
     }
     getRadius() {
         return this.radius;
+    }
+    bounceOnCollision() {
+        if (this.position.x + this.radius > this.containerWidth || this.position.x - this.radius < 0) {
+            this.velocity.x = -this.velocity.x
+        }
+
+        if (this.position.y + this.radius > this.containerHeight || this.position.y - this.radius < 0) {
+            this.velocity.y = -this.velocity.y
+        }
     }
 
 }

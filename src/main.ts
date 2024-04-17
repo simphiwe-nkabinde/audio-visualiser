@@ -104,7 +104,7 @@ function visualizer() {
           const newRadius = (bubbles[i].getRadius() + (unitAve / 4)) / 2
           bubbles[i].update({ radius: newRadius, velocity: { x: 2, y: 2 } },);
         } else {
-            idleBubble(bubbles[i])
+          idleBubble(bubbles[i])
         }
       }
 
