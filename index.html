@@ -63,27 +63,24 @@
     <div id="overlay" class="bg-body-tertiary">
       <button id="start-btn" class="btn btn-dark">Start Audio Visualizer</button>
     </div>
-    <canvas id="bubbles-canvas"></canvas>
-    <audio id="audio-bubbles" controls src="/yesterday.mp3"></audio>
+    <div class="d-flex">
+      <canvas></canvas>
+      <canvas></canvas>
+      <canvas></canvas>
+    </div>
+
+    <audio id="audio-bubbles" controls src=""></audio>
     <ul class="list-unstyled rounded-4 overflow-hidden shadow" id="song-selection">
-      <li class="p-3" onclick="setSong('yesterday', 'one')">Yesterday</li>
-      <li class="p-3" onclick="setSong('i-believe', 'two')">I believe</li>
-      <li class="p-3" onclick="setSong('iphinifa', 'three')">Iphinifa</li>
-      <li class="p-3" onclick="setSong('ungowami', 'four')">Ungowami</li>
-      <li class="p-3" onclick="setSong('wasted-on-you', 'one')">Wasted on you</li>
-      <li class="p-3" onclick="setSong('strateng', 'two')">Strateng</li>
-      <li class="p-3" onclick="setSong('speed-it-up', 'three')">Speed it up</li>
-      <li class="p-3" onclick="setSong('star-boy', 'four')">Star Boy</li>
-      <li class="p-3" onclick="setSong('picasso', 'one')">Picasso</li>
-      <li class="p-3" onclick="setSong('new-level', 'one')">New Level</li>
-      <li class="p-3" onclick="setSong('blase', 'one')">Blasé</li>
-      <li class="p-3" onclick="setSong('sbhekane', 'one')">Sbhekane</li>
     </ul>
   </div>
   <script type="module" src="/src/main.ts"></script>
   <script>
-    function setSong(song, pallet) {
-      PALLET = pallet
+    const songList = [
+      { name: 'yesterday', path: 'yesterday' },
+    ]
+    const listContainer = document.querySelector('#song-selection');
+    listContainer.innerHTML = songList.map(i => (`<li class="p-3" onclick="setSong('${i.path}')">${i.name}</li>`)).join(' ')
+    function setSong(song) {
       const audioEle = document.getElementById('audio-bubbles');
       audioEle.src = '/audio/' + song + '.mp3';
       audioEle.play()
