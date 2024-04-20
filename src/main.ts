@@ -1,7 +1,8 @@
 import './style.css'
-import barGraph from './visualisation/barGraph';
-import waveForm from './visualisation/waveform';
-import bubbleChaos from './visualisation/bubbleChaos';
+import { BarGraphVisualiser } from './classes/visualisers/BarGraphVisualiser';
+import bubbleChaos from './classes/visualisers/bubbleChaos';
+import { waveformVisualiser } from './classes/visualisers/WaveformVisualiser';
+import { BubbleChaosVisualiser } from './classes/visualisers/BubbleChaosVisualiser';
 
 document.querySelector('#start-btn')!.addEventListener('click', (e) => {
   document.querySelector('#overlay')!.remove();
@@ -21,8 +22,8 @@ function visualizer() {
   const bufferLength = analyser.frequencyBinCount;
   const dataArray = new Uint8Array(bufferLength);
 
-  const WIDTH = window.innerWidth/3;
-  const HEIGHT = window.innerHeight/2;
+  const WIDTH = window.innerWidth / 3;
+  const HEIGHT = window.innerHeight / 2;
 
   const [canvas1, canvas2, canvas3] = document.querySelectorAll('canvas'!);
   canvas1.width = WIDTH
@@ -37,8 +38,10 @@ function visualizer() {
   canvas3.height = HEIGHT
   const canvasCtx3 = canvas3.getContext('2d')!;
 
-  waveForm(canvasCtx1, WIDTH, HEIGHT, bufferLength, dataArray, (data: Uint8Array) => analyser.getByteTimeDomainData(data));
-  barGraph(canvasCtx2, WIDTH, HEIGHT, bufferLength, dataArray, (data: Uint8Array) => analyser.getByteTimeDomainData(data));
-  bubbleChaos(canvasCtx3, WIDTH, HEIGHT, bufferLength, dataArray, (data: Uint8Array) => analyser.getByteFrequencyData(data));
+  // waveForm(canvasCtx1, WIDTH, HEIGHT, bufferLength, dataArray, (data: Uint8Array) => analyser.getByteTimeDomainData(data));
+  new waveformVisualiser(canvasCtx1, { width: WIDTH, height: HEIGHT }, bufferLength, dataArray, (data) => analyser.getByteTimeDomainData(data));
+  new BarGraphVisualiser(canvasCtx2, { width: WIDTH, height: HEIGHT }, bufferLength, dataArray, (data) => analyser.getByteFrequencyData(data));
+  // bubbleChaos(canvasCtx3, WIDTH, HEIGHT, bufferLength, dataArray, (data: Uint8Array) => analyser.getByteFrequencyData(data));
+  new BubbleChaosVisualiser(canvasCtx2, { width: WIDTH, height: HEIGHT }, bufferLength, dataArray, (data) => analyser.getByteFrequencyData(data))
 
 }
