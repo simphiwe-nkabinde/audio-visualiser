@@ -1,6 +1,5 @@
 import './style.css'
 import { BarGraphVisualiser } from './classes/visualisers/BarGraphVisualiser';
-import bubbleChaos from './classes/visualisers/bubbleChaos';
 import { waveformVisualiser } from './classes/visualisers/WaveformVisualiser';
 import { BubbleChaosVisualiser } from './classes/visualisers/BubbleChaosVisualiser';
 
@@ -38,10 +37,8 @@ function visualizer() {
   canvas3.height = HEIGHT
   const canvasCtx3 = canvas3.getContext('2d')!;
 
-  // waveForm(canvasCtx1, WIDTH, HEIGHT, bufferLength, dataArray, (data: Uint8Array) => analyser.getByteTimeDomainData(data));
   new waveformVisualiser(canvasCtx1, { width: WIDTH, height: HEIGHT }, bufferLength, dataArray, (data) => analyser.getByteTimeDomainData(data));
   new BarGraphVisualiser(canvasCtx2, { width: WIDTH, height: HEIGHT }, bufferLength, dataArray, (data) => analyser.getByteFrequencyData(data));
-  // bubbleChaos(canvasCtx3, WIDTH, HEIGHT, bufferLength, dataArray, (data: Uint8Array) => analyser.getByteFrequencyData(data));
-  new BubbleChaosVisualiser(canvasCtx2, { width: WIDTH, height: HEIGHT }, bufferLength, dataArray, (data) => analyser.getByteFrequencyData(data))
+  new BubbleChaosVisualiser(canvasCtx3, { width: WIDTH, height: HEIGHT }, bufferLength, dataArray, (data) => analyser.getByteFrequencyData(data))
 
 }
