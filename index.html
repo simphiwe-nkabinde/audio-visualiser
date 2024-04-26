@@ -58,13 +58,10 @@
       justify-content: center;
       align-items: center;
     }
+
     .canvas-container {
       display: flex;
       flex-wrap: wrap;
-    }
-    canvas {
-      width: 50vw;
-      height: 50vh;
     }
   </style>
 </head>
@@ -73,29 +70,25 @@
   <div id="overlay">
     <button id="start-btn">Start Audio Visualizer</button>
   </div>
-  <div class="canvas-container">
-    <canvas></canvas>
-    <canvas></canvas>
-    <canvas></canvas>
-    <canvas></canvas>
-  </div>
-
+  <canvas></canvas>
   <audio controls src=""></audio>
   <ul id="song-selection">
   </ul>
   <script type="module" src="/src/main.ts"></script>
   <script>
     const songList = [
-      { name: 'yesterday', path: 'yesterday' },
-      { name: 'speed it up', path: 'speed-it-up' },
-      { name: 'I believe', path: 'i-believe' },
-      { name: 'picasso', path: 'picasso' },
-      { name: 'blase', path: 'blase' },
-      { name: 'star-boy', path: 'star-boy' },
-      { name: 'iphinifa', path: 'iphinifa' },
+      'balele',
+      'edokodweni',
+      'ikusasa',
+      'imigomo-nemibandela',
+      'luhle-ngani',
+      'maduze',
+      'umcebo',
+      'umoya',
+      'ushevu'
     ]
     const listContainer = document.querySelector('#song-selection');
-    listContainer.innerHTML = songList.map(i => (`<li class="p-3" onclick="setSong('${i.path}')">${i.name}</li>`)).join(' ')
+    listContainer.innerHTML = songList.map(i => (`<li class="p-3" onclick="setSong('${i}')">${i}</li>`)).join(' ')
     function setSong(song) {
       const audioEle = document.querySelector('audio');
       audioEle.src = '/audio/' + song + '.mp3';
