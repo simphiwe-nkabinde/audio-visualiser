@@ -2,20 +2,19 @@ import { BubbleOptions, Position } from "../interfaces/interfaces";
 
 export default class Bubble {
 
-    private position: Position = { x: 0, y: 0 };
-    private velocity: Position = { x: 2, y: 2 };
-    private acceleration: Position = { x: 0, y: 0 };
+    private position: Position = { x: 0, y: 0, z: 0 };
+    private velocity: Position = { x: 2, y: 2, z: 0 };
     private canvasCtx: CanvasRenderingContext2D;
     private radius: number;
-    private bgColor: string;
+    private fillRGBA: number[];
     private containerWidth: number;
     private containerHeight: number;
 
-    constructor(canvasCtx: CanvasRenderingContext2D, startPosition: Position, radius: number, bgColor: string, containerSize: { width: number, height: number }, startVelocity: Position) {
+    constructor(canvasCtx: CanvasRenderingContext2D, startPosition: Position, radius: number, fillRGBA: number[], containerSize: { width: number, height: number }, startVelocity: Position) {
         this.canvasCtx = canvasCtx;
         this.position = startPosition;
         this.radius = radius;
-        this.bgColor = bgColor;
+        this.fillRGBA = fillRGBA;
         this.containerHeight = containerSize.height;
         this.containerWidth = containerSize.width;
         this.velocity = startVelocity
@@ -28,7 +27,7 @@ export default class Bubble {
         this.canvasCtx.shadowOffsetX = this.position.x - (this.containerWidth / 2);
         this.canvasCtx.shadowOffsetY = this.position.y - (this.containerHeight / 2);
         this.canvasCtx.shadowColor = "rgba(0, 0, 0, 0.1)";
-        this.canvasCtx.fillStyle = this.bgColor;
+        this.canvasCtx.fillStyle = `rgba(${this.fillRGBA})`;
         this.canvasCtx.fill();
     }
 
@@ -44,7 +43,8 @@ export default class Bubble {
         if (bubbleOptions.velocity) {
             this.velocity = {
                 x: this.velocity.x > 0 ? bubbleOptions.velocity.x : -bubbleOptions.velocity.x,
-                y: this.velocity.y > 0 ? bubbleOptions.velocity.y : -bubbleOptions.velocity.y
+                y: this.velocity.y > 0 ? bubbleOptions.velocity.y : -bubbleOptions.velocity.y,
+                z: 0
             }
         }
 
